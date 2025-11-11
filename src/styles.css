@@ -6,12 +6,7 @@
   --nav-bottom-line: 3px;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
+/* Reset (pozwalany tylko html, body) + box-sizing dla klasy .page-header */
 html,
 body {
   margin: 0;
@@ -21,12 +16,19 @@ body {
   background: #fff;
 }
 
-header {
+.page-header,
+.page-header * {
+  box-sizing: border-box;
+}
+
+/* Zamiast header: .page-header */
+.page-header {
   width: 100%;
   display: flex;
   align-items: center;
 }
 
+/* LOGO */
 .header-logo {
   display: flex;
   align-items: center;
@@ -37,16 +39,18 @@ header {
   flex-shrink: 0;
 }
 
-.header-logo img {
+.header-logo__img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-nav {
+/* NAV */
+.header-nav {
   display: block;
 }
 
+/* LISTA */
 .nav-list {
   list-style: none;
   padding: 0;
@@ -55,10 +59,12 @@ nav {
   align-items: center;
 }
 
-.nav-list li + li {
+/* li + li tylko po klasie */
+.nav-list__item + .nav-list__item {
   margin-left: var(--nav-spacing);
 }
 
+/* LINKI MENU */
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -79,6 +85,7 @@ nav {
   padding: 0;
 }
 
+/* Aktywne i pseudo-element */
 .nav-link.is-active {
   color: var(--blue);
   position: relative;
@@ -96,6 +103,7 @@ nav {
   pointer-events: none;
 }
 
+/* Focus, hover */
 .nav-link:hover,
 .nav-link:focus {
   color: var(--blue);
@@ -106,13 +114,13 @@ nav {
   outline-offset: 2px;
 }
 
-/* Poprawiony selektor atrybutowy, bez backslashy */
-.nav-link[data-qa="hover"]:hover,
-.nav-link[data-qa="hover"]:focus {
+/* Poprawnie: selektory atrybutowe */
+.nav-link[data-qa='hover']:hover,
+.nav-link[data-qa='hover']:focus {
   color: var(--blue);
 }
 
-.nav-link[data-qa="hover"]:hover::after,
-.nav-link[data-qa="hover"]:focus::after {
+.nav-link[data-qa='hover']:hover::after,
+.nav-link[data-qa='hover']:focus::after {
   bottom: 0;
 }
